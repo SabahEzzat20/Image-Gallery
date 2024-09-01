@@ -85,9 +85,9 @@ slider.addEventListener('touchend', () => {
 
     if (diffX > 50) {
         // Swipe Right - Show Previous Slide
-        showPreviousSlide();
+        prevSlide();
     } else if (diffX < -50) {
         // Swipe Left - Show Next Slide
-        setSliderContent(currentStartIndex + 1, (currentEndIndex + 1) % slidesDiv.length);
+        nextSlide();
     }
 });
