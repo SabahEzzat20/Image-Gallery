@@ -51,8 +51,6 @@ function checker() {
     
     //set active class on current pagination item
     paginationBullets.children[currentSlide - 1].classList.add('active-bullet'); 
-
-
 }
 
 checker();
@@ -107,3 +105,4 @@ sliderSection.addEventListener('mouseenter', stopSlideInterval);
 sliderSection.addEventListener('mouseleave', startSlideInterval);
 
 startSlideInterval(); 
+
