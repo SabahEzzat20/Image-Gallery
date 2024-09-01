@@ -73,38 +73,6 @@ body{
     border: 2px solid rgb(214, 70, 178);
 }
 @media screen and (max-width: 768px){
-    .bullets ul li{
-        width: 6px;
-        height: 6px;
-        border: 1px solid rgb(214, 70, 178);
-    }
-    .bullets ul li.active-bullet{
-        border: 1px solid rgb(214, 70, 178);
-    }
-    
-    .backward-btn,.forward-btn{
-        margin: 0 30px;
-        font-size: 15px;
-    }
-    .slide img{
-        width: 250px;
-        height: 350px;
-    }
-    .slider{
-        width: 250px;
-        height: 350px;
-    }
-}
-@media screen and (max-width: 768px){
-    .bullets ul li{
-        width: 6px;
-        height: 6px;
-        border: 1px solid rgb(214, 70, 178);
-    }
-    .bullets ul li.active-bullet{
-        border: 1px solid rgb(214, 70, 178);
-    }
-    
     .backward-btn,.forward-btn{
         margin: 0 30px;
         font-size: 15px;
