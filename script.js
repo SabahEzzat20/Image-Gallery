@@ -2,6 +2,7 @@ let forwardButton = document.getElementsByClassName('forward-btn')[0];
 let backwardButton = document.getElementsByClassName('backward-btn')[0];
 let sliderImages = Array.from(document.querySelectorAll('.slide'));
 let bullets = document.getElementsByClassName('bullets')[0];
+let sliderSection = document.getElementsByClassName('slider-section')[0];
 console.log(sliderImages);
 let slider = document.getElementsByClassName('slider')[0];
 let slidesCount = sliderImages.length;
@@ -49,7 +50,8 @@ function checker() {
     sliderImages[currentSlide - 1].classList.add('active');
     
     //set active class on current pagination item
-    paginationBullets.children[currentSlide - 1].classList.add('active-bullet');  
+    paginationBullets.children[currentSlide - 1].classList.add('active-bullet'); 
+
 
 }
 
@@ -60,15 +62,14 @@ function removeAllActives() {
     sliderImages.forEach(image => {
         image.classList.remove('active');
     });
-
+    
     //remove active class from all bullets 
     paginationElements.forEach(bullet => {
         bullet.classList.remove('active-bullet');
     });
 }
 
-setInterval(nextSlide, 3000);
-
+//set swipe functionality
 let startX;
 let currentX;
 
@@ -82,7 +83,7 @@ slider.addEventListener('touchmove', (e) => {
 
 slider.addEventListener('touchend', () => {
     const diffX = currentX - startX;
-
+    
     if (diffX > 50) {
         // Swipe Right - Show Previous Slide
         prevSlide();
@@ -91,3 +92,18 @@ slider.addEventListener('touchend', () => {
         nextSlide();
     }
 });
+
+
+// Automatic transition logic
+function startSlideInterval() {
+    slideInterval = setInterval(nextSlide, 3000);
+}
+
+function stopSlideInterval() {
+    clearInterval(slideInterval);
+}
+
+sliderSection.addEventListener('mouseenter', stopSlideInterval);
+sliderSection.addEventListener('mouseleave', startSlideInterval);
+
+startSlideInterval(); 
