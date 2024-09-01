@@ -1,45 +1,74 @@
-let forwardBtn = document.getElementById('forward-btn');
-let backwardBtn = document.getElementById('backward-btn');
-let slides = document.querySelectorAll('.slide img');
-let slidesDiv = document.querySelectorAll('.slide');
+let forwardButton = document.getElementsByClassName('forward-btn')[0];
+let backwardButton = document.getElementsByClassName('backward-btn')[0];
+let sliderImages = Array.from(document.querySelectorAll('.slide'));
 let bullets = document.getElementsByClassName('bullets')[0];
+console.log(sliderImages);
 let slider = document.getElementsByClassName('slider')[0];
-let currentStartIndex;
-let currentEndIndex;
+let slidesCount = sliderImages.length;
+let currentSlide = 1;
 
-slidesDiv.forEach((slide,index) => {
-    // imagesArray.push(slide.getAttribute('src'));
-    slide.setAttribute('data-imageIndex', `${index}`);
-    // console.log(slide.getAttribute('data-imageIndex'));
-    
-})
-// console.log(imagesArray);
-const setSliderContent = (startIndex = 0,endIndex = 2) => {
-    slidesDiv.forEach((slide) => {
-        // console.log(slide.getAttribute('data-imageIndex'));
-        slide.classList.remove('active-slide')
-        if (slide.getAttribute('data-imageIndex') >= startIndex && slide.getAttribute('data-imageIndex') <= endIndex) {
-            slide.classList.add('active-slide');
-            // console.log(slide.getAttribute('data-imageIndex'));
-        }
-    })
-    currentStartIndex = startIndex;
-    currentEndIndex = endIndex;
+forwardButton.onclick = nextSlide;
+backwardButton.onclick = prevSlide;
+
+
+function nextSlide() {
+    currentSlide === slidesCount ? currentSlide = 1 : currentSlide++;
+    checker();
 }
 
-forwardBtn.onclick = () => {
-    setSliderContent(currentStartIndex+1 , (currentEndIndex+1)%slidesDiv.length)
-};
-backwardBtn.onclick = () => {
-    setSliderContent((currentStartIndex - 1 + slidesDiv.length) % slidesDiv.length, (currentEndIndex - 1 + slidesDiv.length) % slidesDiv.length)
-};
-setSliderContent();
+function prevSlide() {
+    currentSlide === 1 ? currentSlide = slidesCount : currentSlide--;
+    checker();
+}
 
-// setInterval(() => {
-//     setSliderContent(currentStartIndex+1 , (currentEndIndex+1)%slidesDiv.length)
-// }, 3000);
-// console.log(document.body);
-// const slider = document.querySelector('.slider');
+let pagination = document.createElement('ul');
+pagination.setAttribute('id', 'pagination-ul');
+bullets.appendChild(pagination);
+
+for (let i = 0; i < slidesCount; i++){
+    let paginationItem = document.createElement('li');
+    paginationItem.setAttribute('data-index', i + 1);
+    pagination.appendChild(paginationItem);
+}
+
+let paginationBullets = document.getElementById('pagination-ul');
+let paginationElements = document.querySelectorAll('#pagination-ul li');
+
+paginationElements.forEach((bullet) => {
+    bullet.addEventListener('click', () => {
+        currentSlide = bullet.getAttribute('data-index');
+        checker();
+    })
+})
+
+function checker() {
+    //remove all active classes from bullets and images
+    removeAllActives();
+
+    //set active class on current slide
+    sliderImages[currentSlide - 1].classList.add('active');
+    
+    //set active class on current pagination item
+    paginationBullets.children[currentSlide - 1].classList.add('active-bullet');  
+
+}
+
+checker();
+
+function removeAllActives() {
+    //remove active class from all images
+    sliderImages.forEach(image => {
+        image.classList.remove('active');
+    });
+
+    //remove active class from all bullets 
+    paginationElements.forEach(bullet => {
+        bullet.classList.remove('active-bullet');
+    });
+}
+
+setInterval(nextSlide, 3000);
+
 let startX;
 let currentX;
 
@@ -62,4 +91,3 @@ slider.addEventListener('touchend', () => {
         setSliderContent(currentStartIndex + 1, (currentEndIndex + 1) % slidesDiv.length);
     }
 });
-

@@ -1,12 +1,15 @@
-body{
+*{
+    box-sizing: border-box;
     padding: 0;
     margin: 0;
-    box-sizing: border-box;
+}
+body{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
+    background-color: rgb(41, 41, 41);
 }
 .slider-section{
     display: flex;
@@ -16,19 +19,53 @@ body{
 
 .slider{
     display: flex;
-    overflow: hidden;    
-    width: 720px;
-    /* background-color: red; */
-
+    position: relative;
+    width: 300px;
+    height: 400px;
 }
 .slide{
-    padding: 20px;
-    display: none;
-    /* opacity: 0; */
-    /* transform: translateX(100%);  */
-}
-.active-slide{
-    transition: 0.3s ease-in;
-    display: block;
+    position: absolute;
+    opacity: 0;
+    transition: opacity 1s;
 
+}
+.slide.active{
+    opacity: 1;
+}
+
+.backward-btn,.forward-btn{
+    cursor: pointer;
+    border: none;
+    margin: 0 50px;
+    font-size: 20px;
+    user-select: none;
+    background-color: transparent;
+    color: rgb(214, 70, 178);
+}
+
+.bullets ul{
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    width: 300px;
+    gap: 15px;
+    text-align: center;
+    list-style: none;
+
+}
+.bullets ul li{
+    cursor: pointer;
+    transition: 0.4s ease-in-out;
+    width: 8px;
+    height: 8px;
+    box-sizing: content-box;
+    background-color: rgb(214, 70, 178);
+    border: 2px solid rgb(214, 70, 178);
+    border-radius: 50%;
+}
+.bullets ul li.active-bullet{
+    background-color: rgb(41, 41, 41);
+    border: 2px solid rgb(214, 70, 178);
 }
