@@ -23,7 +23,7 @@ git clone https://github.com/SabahEzzat20/Image-Gallery.git
 ```
 ```bash
 # Navigate into the directory
-cd ImageGallary
+cd Image-Gallary-main
 ```
 ## Demo
 - [Live Demo](https://image-gallery-hazel-nine.vercel.app/)
